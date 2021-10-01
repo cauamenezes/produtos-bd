@@ -1,7 +1,23 @@
 <?php
 
+session_start();
+
 //Conexão com banco de dados
 require("../database/conexao.php");
+
+//Função de validação
+function vaildarCampos()
+{
+
+    $erros = [];
+
+    if (!isset($_POST['descricao']) || $_POST['descricao'] == "") {
+
+        $erros[] = "O campo descrição é de preenchimento obrigatório";
+    }
+
+    return $erros;
+}
 
 /* Tratamento dos dados vindos do formulário
 
@@ -11,6 +27,17 @@ require("../database/conexao.php");
 
 switch ($_POST["acao"]) {
     case 'inserir':
+
+        $erros = vaildarCampos();
+
+        if (count($erros) > 0) {
+
+            $_SESSION["erros"] = $erros;
+
+            header("location: index.php");
+
+            exit();
+        }
         // echo "INSERIR"; exit;
         $descricao = $_POST["descricao"];
 
@@ -30,7 +57,19 @@ switch ($_POST["acao"]) {
 
         break;
 
+    case 'deletar';
+
+        $categoriaId = $_POST['categoriaId'];
+
+        $sql = "DELETE FROM tbl_categoria WHERE id = $categoriaId";
+
+        $resultado = mysqli_query($conexao, $sql);
+
+        header("location: index.php");
+
+        break;
+
     default:
         # code...
         break;
-}
+};

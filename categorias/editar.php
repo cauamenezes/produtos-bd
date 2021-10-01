@@ -1,20 +1,16 @@
 <?php
 
-session_start();
-
 require("../database/conexao.php");
 
-$sql = "SELECT * FROM tbl_categoria";
+$idCategoria = $_GET['id'];
+
+$sql = "SELECT * FROM tbl_categoria WHERE id = $idCategoria";
 
 $resultado = mysqli_query($conexao, $sql);
 
-// echo "<pre>";
-// var_dump($resultado);
-// echo "</pre>";
-// exit;
+$categoria = mysqli_fetch_array($resultado);
 
 ?>
-
 
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -37,7 +33,7 @@ $resultado = mysqli_query($conexao, $sql);
             <main>
                 <form class="form-categoria" method="POST" action="./acoes.php">
                     <input type="hidden" name="acao" value="inserir" />
-                    <h1 class="span2">Adicionar Categorias</h1>
+                    <h1 class="span2">Editar Categorias</h1>
 
                     <ul>
                         <?php
@@ -65,31 +61,12 @@ $resultado = mysqli_query($conexao, $sql);
 
                     <div class="input-group span2">
                         <label for="descricao">Descrição</label>
-                        <input type="text" name="descricao" id="descricao" />
+                        <input type="text" name="descricao" id="descricao" value="<?php echo $categoriaa['descricao']?>" />
                     </div>
                     <button type="button" onclick="javascript:window.location.href = '../produtos/'">Cancelar</button>
-                    <button>Salvar</button>
+                    <button>Editar</button>
                 </form>
-                <h1>Lista de Categorias</h1>
-
-                <?php
-
-                while ($categoria = mysqli_fetch_array($resultado)) {
-
-                ?>
-
-                    <div class="card-categorias">
-                        <?php echo $categoria["descricao"]; ?>
-                        <img onclick="deletar(<?php echo $categoria['id']; ?>)" src="https://icons.veryicon.com/png/o/construction-tools/coca-design/delete-189.png" />
-                        <img onclick="javascript: window.location = 'editar.php?id=<?php echo $categoria['id']; ?>'" src="https://icons.veryicon.com/png/o/internet--web/aeps/edit-125.png" />
-                    </div>
-
-                <?php } ?>
-
-                <form id="form-deletar" method="POST" action="./acoes.php">
-                    <input type="hidden" name="acao" value="deletar" />
-                    <input type="hidden" id="categoriaId" name="categoriaId" value="" />
-                </form>
+                
             </main>
         </section>
     </div>

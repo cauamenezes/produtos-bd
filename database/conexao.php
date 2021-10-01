@@ -14,7 +14,7 @@ const DATABASE = 'icatalogo';
 
 $conexao = mysqli_connect(HOST, USER, PASSWORD, DATABASE);
 
-if($conexao === false) {
+if ($conexao === false) {
     die(mysqli_connect_error());
 }
 
