@@ -1,3 +1,25 @@
+<?php
+
+//conexão com o banco de dados
+
+//produto novo
+// ../
+
+//produto/
+// ../
+
+//datanase/conexao.php
+
+require("../../database/conexao.php");
+
+//query sql
+$sql = "SELECT * FROM tbl_categoria";
+
+//executar a query sql na base de dados
+$resultado = mysqli_query($conexao, $sql);
+
+?>
+
 <!DOCTYPE html>
 <html lang="pt-br">
 
@@ -69,9 +91,21 @@
             <label for="categoria">Categoria</label>
             <select id="categoria" name="categoria" required>
               <option value="">SELECIONE</option>
-              
-                <option value=""></option>
-              
+
+              <!-- início da listagem de categorias vindas do banco  -->
+              <?php
+
+              while ($categoria = mysqli_fetch_array($resultado)) {
+
+              ?>
+
+                <option value="<?php echo $categoria["id"] ?>"> <?php echo $categoria["descricao"]?> </option>
+
+              <?php
+              }
+              ?>
+              <!-- fim da listagem de categorias vindas do bancco -->
+
             </select>
 
           </div>
@@ -94,7 +128,7 @@
   <footer>
     SENAI 2021 - Todos os direitos reservados
   </footer>
-  
+
 </body>
 
 </html>

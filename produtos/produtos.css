@@ -64,7 +64,7 @@
   font-size: 26px;
 }
 
-.card-produto section .preco > em {
+.card-produto section .preco>em {
   font-size: 14px;
   color: green;
   text-decoration: line-through;
@@ -91,6 +91,7 @@
   border-radius: 4px;
   margin-right: 4px;
 }
+
 .card-produto section .descricao {
   margin-top: 16px;
   font-size: 16px;
