@@ -99,7 +99,7 @@ $resultado = mysqli_query($conexao, $sql);
 
               ?>
 
-                <option value="<?php echo $categoria["id"] ?>"> <?php echo $categoria["descricao"]?> </option>
+                <option value="<?php echo $categoria["id"] ?>"> <?php echo $categoria["descricao"] ?> </option>
 
               <?php
               }
