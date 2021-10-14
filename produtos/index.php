@@ -1,3 +1,19 @@
+<?php
+
+require('../database/conexao.php');
+
+$sql = "SELECT p.*, c.descricao FROM tbl_produto p
+    INNER JOIN tbl_categoria c ON
+    p.categoria_id = c.id;";
+
+$resultado = mysqli_query($conexao, $sql);
+
+//teste de seleção de dados
+// var_dump($resultado);
+// exit;
+
+?>
+
 <!DOCTYPE html>
 <html lang="pt-br">
 
@@ -32,37 +48,49 @@
 
                 <!-- LISTAGEM DE PRODUTOS (INICIO) -->
 
-                <article class="card-produto">
+                <?php
 
-                    <div class="acoes-produtos">
-                        <img onclick="javascript: window.location = './editar/?id=<?= $produto['id'] ?>'" src="../imgs/edit.svg" />
-                        <img onclick="deletar(<?= $produto['id'] ?>)" src="../imgs/trash.svg" />
-                    </div>
+                while ($produto = mysqli_fetch_array($resultado)) {
 
-                    <figure>
-                        <img src="" />
-                    </figure>
 
-                    <section>
 
-                        <span class="preco">
-                            R$
-                            <em>% off</em>
-                        </span>
+                ?>
 
-                        <span class="parcelamento">ou em
-                            <em>
-                                x R$ sem juros
-                            </em>
-                        </span>
+                    <article class="card-produto">
 
-                        <span class="descricao"></span>
+                        <div class="acoes-produtos">
+                            <img onclick="javascript: window.location = './editar/?id=<?= $produto['id'] ?>'" src="../imgs/edit.svg" />
+                            <img onclick="deletar(<?= $produto['id'] ?>)" src="../imgs/trash.svg" />
+                        </div>
 
-                        <span class="categoria">
-                            <em></em>
-                        </span>
+                        <figure>
+                            <img src="fotos/<?php echo $produto["imagem"] ?>" />
+                        </figure>
 
-                </article>
+                        <section>
+
+                            <span class="preco">
+                                R$
+                                <em>% off</em>
+                            </span>
+
+                            <span class="parcelamento">ou em
+                                <em>
+                                    x R$ sem juros
+                                </em>
+                            </span>
+
+                            <span class="descricao"></span>
+
+                            <span class="categoria">
+                                <em></em>
+                            </span>
+
+                    </article>
+
+                <?php
+                }
+                ?>
 
         </section>
 
