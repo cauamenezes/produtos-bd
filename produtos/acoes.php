@@ -36,11 +36,47 @@ switch ($_POST["acao"]) {
         (descricao, peso, quantidade, cor, tamanho, valor, desconto, imagem, categoria_id)
          VALUES ('$descricao', $peso, $quantidade, '$cor', '$tamanho', $valor, $desconto, '$novoNome', $categoriaId)";
 
-         //execução 
-         $resultado = mysqli_query($conexao, $sql);
+        //execução 
+        $resultado = mysqli_query($conexao, $sql);
 
-         //redireciona para o index
-         header("location: index.php");
+        //redireciona para o index
+        header("location: index.php");
+
+        break;
+
+    case "editar":
+
+        //atualizando a imagem do produto
+
+        $idProduto = $_POST["idProduto"];
+
+        if($_FILES["foto"]["error"] != UPLOAD_ERR_NO_FILE) {
+
+            $sqlImagem = "SELECT imagem FROM tbl_produto WHERE id = $idProduto";
+
+            $resultado = mysqli_query($conexao, $sqlImagem);
+            $produto = mysqli_fetch_array($resultado);
+
+            echo "/fotos/" . $produto["imagem"];
+            exit;
+
+        }
+
+        //captura os dados de texto e de número
+        $descricao = $_POST["descricao"];
+        $peso = str_replace(",", ".", $_POST["peso"]);
+        $peso = str_replace(".", "", $peso);
+
+        $valor = str_replace(",", ".", $_POST["valor"]);
+        $valor = str_replace(".", "", $valor);
+
+        $quantidade = $_POST["quantidade"];
+        $cor = $_POST["cor"];
+        $tamanho =$_POST["tamanho"];
+        $desconto = $_POST["desconto"];
+        $idCategoria = $_POST["categoria"];
+
+
 
         break;
 

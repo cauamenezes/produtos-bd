@@ -4,5 +4,4 @@
        NA PASTA DE PRODUTOS. O ARQUIVO INDEX DESSA PASTA RESOLVE A
        PÁGINA INICIAL DA APLICAÇÃO */
     header('location: produtos/');
-
 ?>
