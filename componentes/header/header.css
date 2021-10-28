@@ -1,6 +1,6 @@
 .header {
   position: fixed;
-  height: 60px;
+  height: 500px;
   width: 100%;
   background-color: var(--accentPrimary);
   color: var(--textPrimary);
