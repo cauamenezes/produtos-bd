@@ -8,7 +8,7 @@
     function realizarLogin($usuario, $senha, $conexao){
 
         $sql = "SELECT * FROM tbl_administrador
-                WHERE usuario = '$usuario'";
+                WHERE usuario = '$usuario' AND senha = '$senha'";
 
         $resultado = mysqli_query($conexao, $sql);
 
@@ -52,3 +52,7 @@
             # code...
             break;
     }
+
+    
+
+?>

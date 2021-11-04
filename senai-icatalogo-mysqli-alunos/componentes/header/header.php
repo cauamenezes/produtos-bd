@@ -1,11 +1,9 @@
 
 <?php
 
-if(!isset($_SESSION)) {
-    session_start();
-}
+session_start();
 
-$raiz = "/caua_menezes/senai-icatalogo-mysqli-alunos";
+$raiz = "/prof-cristiano/senai-icatalogo-mysqli-alunos";
 
 ?>
 
@@ -64,7 +62,7 @@ $raiz = "/caua_menezes/senai-icatalogo-mysqli-alunos";
         let containerLogin = document.querySelector("#container-login");
         let h1Form = document.querySelector("#container-login > h1");
         let form = document.querySelector("#container-login > form");
-        //se estiver oculto, mostra
+        //se estiver oculto, mostra 
         if (containerLogin.style.opacity == 0) {
             h1Form.style.display = "block";
             form.style.display = "flex";
